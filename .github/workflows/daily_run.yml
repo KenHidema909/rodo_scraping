@@ -3,7 +3,7 @@ name: MHLW Scraper Daily Run
 on:
   schedule:
     # 毎日 日本時間 10:00 (UTC 1:00) に実行
-    - cron: '0 1 * * *'
+  - cron: '0 7 * * *'
   # 手動でも実行できるようにするボタン
   workflow_dispatch:
 
