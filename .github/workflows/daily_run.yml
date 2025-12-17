@@ -1,0 +1,36 @@
+name: MHLW Scraper Daily Run
+
+on:
+  schedule:
+    # 毎日 日本時間 10:00 (UTC 1:00) に実行
+    - cron: '0 1 * * *'
+  # 手動でも実行できるようにするボタン
+  workflow_dispatch:
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+    
+    # 権限の設定（エラー回避用）
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run scraper script
+        env:
+          # ここで先ほど登録したURLをプログラムに渡します
+          GAS_APP_URL: ${{ secrets.GAS_APP_URL }}
+        run: |
+          python main.py
