@@ -55,7 +55,7 @@ def get_date_from_filename(href):
         try:
             year_short = int(match.group(1))
             file_month = int(match.group(2))
-            if file_month < 1 or file_month > 12: return None
+            if file_month < 1 or file_month > 13: return None
             data_month = file_month - 1
             year_full = 2000 + year_short
             if data_month == 0:
